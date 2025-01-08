@@ -1,0 +1,16 @@
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <ix-input
+        label="Some Label"
+        formControlName="input"
+        [required]="true"
+        valid-text="Input is valid"
+        invalid-text="This field is required"
+      >
+      </ix-input>
+    </div>
+
+    <ix-button type="submit" [disabled]="!form.valid">Submit</ix-button>
+  </form>
+</div>
