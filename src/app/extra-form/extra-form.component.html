@@ -1,12 +1,26 @@
 <div class="form-container">
+  <p>
+    Form with slightly modified CustomRequiredValidator from the documentation
+  </p>
+  <p>
+    This represents that adjusting the CustomRequiredValidator to !pristine is not enough and that setting the validation messages conditionally also does not work
+  </p>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-field">
       <ix-input
-        label="Some Label"
-        formControlName="input"
-        valid-text="Input is valid"
-        invalid-text="This field is required"
-      >
+        label="Input"
+        [validText]="getValidText()"
+        [invalidText]="getInvalidText()"
+        formControlName="input">
+      </ix-input>
+    </div>
+    <div class="form-field">
+      <ix-input
+        label="Email"
+        type="email"
+        formControlName="email"
+        [validText]="getValidText()"
+        [invalidText]="getInvalidText()">
       </ix-input>
     </div>
 

@@ -1,9 +1,9 @@
 .form-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 400px;
-  padding: 1rem;
+  margin-bottom: 120px; 
 
   mat-form-field {
     width: 100%;
@@ -11,6 +11,11 @@
 
   ix-button {
     margin-top: 1rem;
+  }
+
+  form {
+    width: 100%;
+    max-width: 400px;
   }
 }
 
@@ -74,21 +79,4 @@
   color: red;
   font-size: 0.8em;
   margin-top: 5px;
-}
-
-button {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px 16px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-
-  &:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
 }

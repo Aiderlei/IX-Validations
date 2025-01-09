@@ -1,0 +1,21 @@
+<div class="form-container">
+  <p>
+    This form is the exact example from the documentation with using the CustomRequiredValidator
+  </p>
+  <p>
+    This represens that the suggested solution from the documentation is incorrect as it allows to submit an empty form and shows incorrect valid feedback
+  </p>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <ix-input
+      label="Input"
+      formControlName="input"
+      valid-text="Input is valid"
+      invalid-text="Input is required"
+    ></ix-input>
+    </div>
+
+
+    <ix-button type="submit" [disabled]="!form.valid">Submit</ix-button>
+  </form>
+</div>

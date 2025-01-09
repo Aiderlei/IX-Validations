@@ -1,35 +1,26 @@
 <div class="form-container">
+  <p>
+    This form represents how the required field validation is supposed to work
+  </p>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-field">
       <label for="firstName" [class.invalid]="form.get('firstName')?.invalid && (form.get('firstName')?.dirty || form.get('firstName')?.touched)">First Name:</label>
-      <input 
-        id="firstName" 
-        type="text" 
+      <input
+        id="firstName"
+        type="text"
         formControlName="firstName"
         [class.invalid]="form.get('firstName')?.invalid && (form.get('firstName')?.dirty || form.get('firstName')?.touched)"
         [class.valid]="form.get('firstName')?.valid && (form.get('firstName')?.dirty || form.get('firstName')?.touched)">
-      
+
       <div *ngIf="form.get('firstName')?.invalid && (form.get('firstName')?.dirty || form.get('firstName')?.touched)" class="validation-message error">
         <i class="validation-icon error"></i>
         <span>First name is required</span>
       </div>
-      
+
       <div *ngIf="form.get('firstName')?.valid && (form.get('firstName')?.dirty || form.get('firstName')?.touched)" class="validation-message success">
         <i class="validation-icon success"></i>
         <span>Input is valid</span>
       </div>
-    </div>
-
-    <!-- TODO the validator will have to differentiate between different validation messages with a method -->
-     <!-- it would be possible to conditionally set the validation message-->
-    <div class="form-field">
-      <ix-input
-        label="Email"
-        type="email"
-        formControlName="email"
-        [validText]="getValidText()"
-        [invalidText]="getInvalidText()">
-      </ix-input>
     </div>
 
     <mat-form-field>
@@ -38,7 +29,7 @@
       <!-- This error uses internal logic when validation error should be displayed as well, only using #errors is not enough -->
       <!-- A good solution for IX may be to add boolean attributes showValidity and showError-->
       <mat-error *ngIf="form.get('description')?.errors?.['required']">Description is required</mat-error>
-    </mat-form-field>  
+    </mat-form-field>
 
     <ix-button type="submit" [disabled]="!form.valid">Submit</ix-button>
   </form>

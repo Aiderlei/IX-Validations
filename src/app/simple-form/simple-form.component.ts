@@ -2,7 +2,6 @@ import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IxModule, IxInput } from '@siemens/ix-angular';
-import { customRequiredValidator } from '../validators/custom.validators';
 
 @Component({
   selector: 'app-simple-form',
@@ -18,13 +17,10 @@ export class SimpleFormComponent {
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       input: ['', [
-        customRequiredValidator(), 
-        // Validators.required
+        Validators.required
       ]]
     });
   }
-
-  // It could possibly be fixed with ngAfterViewInit with ViewChild on IxInput, onValidityStateChange does not run on initial render pass
 
   onSubmit(): void {
     if (this.form.valid) {

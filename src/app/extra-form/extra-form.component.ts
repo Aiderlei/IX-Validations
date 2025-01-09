@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IxModule, IxInput } from '@siemens/ix-angular';
-import { customRequiredValidator } from '../validators/custom.validators';
 
 @Component({
   selector: 'app-extra-form',
@@ -17,13 +16,40 @@ export class ExtraFormComponent {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      input: ['', [customRequiredValidator()]]
+      input: ['', [this.customRequiredValidatorAdjusted()]],
+      email: ['', [Validators.required]]
     });
+  }
+
+  getValidText() {
+    const emailControl = this.form.get('email');
+    if (emailControl?.valid && !emailControl.errors && !emailControl.pristine) {
+      return 'Email is valid'
+    }
+    return null
+  }
+
+  getInvalidText() {
+    const emailControl = this.form.get('email');
+    if (emailControl?.errors?.['required'] && !emailControl.pristine) {
+      return 'Email is required'
+    }
+    return null
   }
 
   onSubmit(): void {
     if (this.form.valid) {
-      alert('Form submitted with value: ' + this.form.get('input')?.value);
+      alert('Form submitted with values:\nInput: ' + this.form.get('input')?.value + 
+            '\nEmail: ' + this.form.get('email')?.value);
     }
+  }
+
+  private customRequiredValidatorAdjusted() {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.pristine) { 
+        return Validators.required(control);
+      }
+      return null;
+    };
   }
 }
